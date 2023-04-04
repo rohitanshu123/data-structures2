@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+
+
+
+
+    <script>
+        class List {
+            constructor(data) {
+                this.head = {
+                    value: data,
+                    next: null
+                }
+                this.tail = this.head;
+                this.size = 1;
+
+            }
+
+            appendNode(nodeData) {
+
+                let newNode = {
+                    value: nodeData,
+                    next: null
+                }
+                this.tail.next = newNode;
+                this.tail = newNode;
+                this.size += 1;
+            }
+
+            // traversingLinkedList() {
+            //     let counter = 0;
+            //     let currentNode = this.head;
+            //     while (counter < this.size) {
+            //         console.log(currentNode.value);
+            //         currentNode = currentNode.next;
+            //         counter++;
+            //     }
+            // }
+
+            traversing(req) {
+                let counter = 0;
+                let currentNode = this.head;
+                while (counter != req) {
+                    counter++;
+                    currentNode = currentNode.next;
+
+                }
+                return currentNode;
+
+            }
+
+
+            // inserting element at particular position
+            insertAt(index, data) {
+
+                let newNode = {
+                    value: data,
+                    next: null
+                }
+
+                let leadNode = this.traversing(index - 1);
+                let nextNode = this.traversing(index);
+
+                leadNode.next = newNode;
+                newNode.next = nextNode;
+
+                this.size += 1;
+            }
+
+            prependNode(firstData) {
+
+                let firstNode = {
+                    value: firstData,
+                    next: null
+                }
+
+                firstNode.next = this.head;
+                this.head = firstNode;
+
+
+
+
+
+
+
+
+                this.size += 1;
+
+
+            }
+
+            deleteNode(index) {
+                let leadNode = this.traversing(index - 1);
+                let nextNode = this.traversing(index + 1);
+                leadNode.next = nextNode;
+
+            }
+
+            reverseLinkedList() {
+                if (this.head == null || this.head.next == null) {
+                    return
+                }
+                let previousNode = this.head;
+                let currentNode = this.head.next;
+
+                while (currentNode != null) {
+                    let nextNode = currentNode.next;
+                    currentNode.next = previousNode;
+
+                    //update
+                    previousNode = currentNode;
+                    currentNode = previousNode;
+
+
+                }
+
+                this.head.next = null;
+                this.head = previousNode;
+
+            }
+
+
+        }
+
+        //object creation
+
+
+        let list = new List(10);
+
+
+
+
+        list.appendNode(30);
+        list.appendNode(100);
+        list.appendNode(40);
+        list.appendNode(50);
+        list.insertAt(1, 20);
+
+        list.prependNode(90);
+
+        list.deleteNode(4);
+        list.reverseLinkedList();
+
+
+        // list.traversingLinkedList();
+
+
+
+
+
+
+
+
+
+
+
+
+        console.log(list);
+
+
+
+    </script>
+</body>
+
+</html>
